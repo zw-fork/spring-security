@@ -284,6 +284,7 @@ public final class WebSecurity extends AbstractConfiguredSecurityBuilder<Filter,
 		for (SecurityBuilder<? extends SecurityFilterChain> securityFilterChainBuilder : this.securityFilterChainBuilders) {
 			securityFilterChains.add(securityFilterChainBuilder.build());
 		}
+		// 封装过滤器链对象
 		FilterChainProxy filterChainProxy = new FilterChainProxy(securityFilterChains);
 		if (this.httpFirewall != null) {
 			filterChainProxy.setFirewall(this.httpFirewall);

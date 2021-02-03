@@ -124,6 +124,7 @@ public class ExceptionTranslationFilter extends GenericFilterBean implements Mes
 			throw ex;
 		}
 		catch (Exception ex) {
+			// 处理SpringSecurityException异常。捕获FilterSecurityInterceptor抛出的AccessDeniedException异常(认证失败异常)
 			// Try to extract a SpringSecurityException from the stacktrace
 			Throwable[] causeChain = this.throwableAnalyzer.determineCauseChain(ex);
 			RuntimeException securityException = (AuthenticationException) this.throwableAnalyzer
@@ -170,6 +171,7 @@ public class ExceptionTranslationFilter extends GenericFilterBean implements Mes
 			handleAuthenticationException(request, response, chain, (AuthenticationException) exception);
 		}
 		else if (exception instanceof AccessDeniedException) {
+			//
 			handleAccessDeniedException(request, response, chain, (AccessDeniedException) exception);
 		}
 	}

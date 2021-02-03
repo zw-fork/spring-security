@@ -348,6 +348,8 @@ public abstract class WebSecurityConfigurerAdapter implements WebSecurityConfigu
 	 * `permitAll()` authorization rule for more details on public endpoints.
 	 * @param http the {@link HttpSecurity} to modify
 	 * @throws Exception if an error occurs
+	 *
+	 * 覆盖该方法配置自定义的HttpSecurity参数
 	 */
 	protected void configure(HttpSecurity http) throws Exception {
 		this.logger.debug("Using default configure(HttpSecurity). "

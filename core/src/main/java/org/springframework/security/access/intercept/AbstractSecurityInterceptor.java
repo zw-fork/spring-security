@@ -205,6 +205,7 @@ public abstract class AbstractSecurityInterceptor
 			this.logger.trace(LogMessage.format("Authorizing %s with attributes %s", object, attributes));
 		}
 		// Attempt authorization
+		// 进行授权
 		attemptAuthorization(object, attributes, authenticated);
 		if (this.logger.isDebugEnabled()) {
 			this.logger.debug(LogMessage.format("Authorized %s with attributes %s", object, attributes));
@@ -235,9 +236,10 @@ public abstract class AbstractSecurityInterceptor
 	private void attemptAuthorization(Object object, Collection<ConfigAttribute> attributes,
 			Authentication authenticated) {
 		try {
+			// 进行授权
 			this.accessDecisionManager.decide(authenticated, object, attributes);
 		}
-		catch (AccessDeniedException ex) {
+		catch (AccessDeniedException ex) {   //授权失败
 			if (this.logger.isTraceEnabled()) {
 				this.logger.trace(LogMessage.format("Failed to authorize %s with attributes %s using %s", object,
 						attributes, this.accessDecisionManager));
@@ -245,6 +247,7 @@ public abstract class AbstractSecurityInterceptor
 			else if (this.logger.isDebugEnabled()) {
 				this.logger.debug(LogMessage.format("Failed to authorize %s with attributes %s", object, attributes));
 			}
+			// 发布授权失败事件
 			publishEvent(new AuthorizationFailureEvent(object, attributes, authenticated, ex));
 			throw ex;
 		}

@@ -292,6 +292,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	 * <li>Invokes {@link #performBuild()} which actually builds the Object</li>
 	 * </ul>
 	 */
+	//
 	@Override
 	protected final O doBuild() throws Exception {
 		synchronized (this.configurers) {
